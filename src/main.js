@@ -1,6 +1,8 @@
 import React from 'react';
 import {Router, Route, RouteHandler, Link, IndexRoute} from 'react-router';
 
+import AltContainer from 'alt/components/AltContainer';
+
 import LoginStore from './stores/LoginStore';
 
 class Home extends React.Component {
@@ -19,7 +21,7 @@ class Home extends React.Component {
 class LoginPage extends React.Component {
   render() {
     return (
-      <AltContainer store={UsersStore}>
+      <AltContainer store={LoginStore}>
         <Login {...this.props} />
       </AltContainer>)
   }
@@ -32,7 +34,14 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    LoginStore.listen(this.onChange);
+    LoginStore.state.username = '';
+  }
+
+  componentDidUpdate(newState) {
+    if (newState.loggedIn) {
+      console.log('Logged in');
+      newState.history.pushState({}, newState.location.state);
+    }
   }
 
   username(e) {
