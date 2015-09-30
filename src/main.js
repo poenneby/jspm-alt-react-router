@@ -5,13 +5,11 @@ import AltContainer from 'alt/components/AltContainer';
 
 import LoginStore from './stores/LoginStore';
 
-class Home extends React.Component {
+class HomePage extends React.Component {
 
   constructor() {
     super();
-    console.log(LoginStore.state.loggedIn);
   }
-
 
   render() {
     return (<div><h1>Hello!</h1></div>);
@@ -37,10 +35,12 @@ class Login extends React.Component {
     LoginStore.state.username = '';
   }
 
-  componentDidUpdate(newState) {
-    if (newState.loggedIn) {
+  componentDidUpdate(oldState) {
+    if (LoginStore.state.loggedIn) {
       console.log('Logged in');
-      newState.history.pushState({}, newState.location.state);
+      oldState.history.pushState({}, oldState.location.state);
+    } else {
+      alert(LoginStore.state.error);
     }
   }
 
@@ -59,16 +59,14 @@ class Login extends React.Component {
 }
 
 function authenticate(nextState, replaceState) {
-  if (LoginStore.state.loggedIn) {
-    alert('hello');
-  } else {
+  if (!LoginStore.state.loggedIn) {
     replaceState(nextState.location.pathname, '/login');
   }
 }
 
 React.render(
   <Router>
-    <Route path="/" component={Home} onEnter={authenticate} />
+    <Route path="/" component={HomePage} onEnter={authenticate} />
     <Route path="/login" component={LoginPage} />
   </Router>,
   document.getElementById('app'));

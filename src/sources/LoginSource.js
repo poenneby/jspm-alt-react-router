@@ -3,18 +3,18 @@ import LoginActions from '../actions/LoginActions';
 const LoginSource = {
   login() {
     return {
-      remote() {
+      remote(state) {
         return new Promise(function (resolve, reject) {
           // simulate an asynchronous flow where data is fetched on
           // a remote server somewhere.
           setTimeout(function () {
 
             // change this to `false` to see the error action being handled.
-            if (true) {
+            if (state.username === 'Peter') {
               // resolve with some mock data
               resolve(true);
             } else {
-              reject('Things have broken');
+              reject('Username and/or password incorrect');
             }
           }, 250);
         });
@@ -26,8 +26,7 @@ const LoginSource = {
       },
 
       success: LoginActions.loginSuccess,
-      error: LoginActions.loginFailure,
-      loading: LoginActions.login
+      error: LoginActions.loginFailure
     }
   }
 };
