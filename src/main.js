@@ -16,6 +16,15 @@ class Home extends React.Component {
   }
 }
 
+class LoginPage extends React.Component {
+  render() {
+    return (
+      <AltContainer store={UsersStore}>
+        <Login {...this.props} />
+      </AltContainer>)
+  }
+}
+
 class Login extends React.Component {
 
   constructor() {
@@ -24,10 +33,6 @@ class Login extends React.Component {
 
   componentDidMount() {
     LoginStore.listen(this.onChange);
-  }
-
-  onChange(e) {
-    console.log('User logged in: ' + e.loggedIn);
   }
 
   username(e) {
@@ -55,6 +60,6 @@ function authenticate(nextState, replaceState) {
 React.render(
   <Router>
     <Route path="/" component={Home} onEnter={authenticate} />
-    <Route path="/login" component={Login} />
+    <Route path="/login" component={LoginPage} />
   </Router>,
   document.getElementById('app'));
