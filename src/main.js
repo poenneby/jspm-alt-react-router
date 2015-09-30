@@ -18,6 +18,18 @@ class Home extends React.Component {
 
 class Login extends React.Component {
 
+  constructor() {
+    super();
+  }
+
+  componentDidMount() {
+    LoginStore.listen(this.onChange);
+  }
+
+  onChange(e) {
+    console.log('User logged in: ' + e.loggedIn);
+  }
+
   username(e) {
     LoginStore.state.username = e.target.value;
   }
@@ -36,7 +48,7 @@ function authenticate(nextState, replaceState) {
   if (LoginStore.state.loggedIn) {
     alert('hello');
   } else {
-    replaceState({}, '/login');
+    replaceState(nextState.location.pathname, '/login');
   }
 }
 
