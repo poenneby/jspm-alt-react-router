@@ -6,4 +6,4 @@ class UserActions {
 	}
 }
 
-module.exports = alt.createActions(UserActions);
+export default alt.createActions(UserActions);

@@ -1,12 +1,14 @@
-console.log('Hello');
-
 import React from 'react';
-import {Router, Route} from 'react-router';
+import {Router, Route, RouteHandler, Link, IndexRoute} from 'react-router';
 
-import {UserStore} from 'src/stores/UserStore';
-import {UserActions} from 'src/actions/UserActions';
+import UserStore from './stores/UserStore';
 
-class Hello extends React.Component {
+class Home extends React.Component {
+
+  constructor() {
+    super();
+    console.log(UserStore.state.loggedIn);
+  }
 
 
   render() {
@@ -14,12 +16,28 @@ class Hello extends React.Component {
   }
 }
 
-function hello() {
-  if (UserStore.state.loggedIn) {
-    alert('hello');
+class Login extends React.Component {
+
+  username(e) {
+    UserStore.state.username = e.target.value;
+  }
+
+  render() {
+    return (<div><form><input type="text" onChange={this.username.bind(this)} /><input type="submit" value="Login" /></form></div>);
   }
 }
 
-React.render(<Router>
-  <Route path="/" component={Hello} onEnter={hello} />
-</Router>, document.getElementById('app'));
+function authenticate(nextState, replaceState) {
+  if (UserStore.state.loggedIn) {
+    alert('hello');
+  } else {
+    replaceState({}, '/login');
+  }
+}
+
+React.render(
+  <Router>
+    <Route path="/" component={Home} onEnter={authenticate} />
+    <Route path="/login" component={Login} />
+  </Router>,
+  document.getElementById('app'));
