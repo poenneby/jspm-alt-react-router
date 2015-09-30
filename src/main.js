@@ -12,7 +12,18 @@ class HomePage extends React.Component {
   }
 
   render() {
-    return (<div><h1>Hello!</h1></div>);
+    return (<div><h1>A protected page!</h1></div>);
+  }
+}
+
+class AboutPage extends React.Component {
+
+  constructor() {
+    super();
+  }
+
+  render() {
+    return (<div><h1>Another protected page!</h1></div>);
   }
 }
 
@@ -67,6 +78,7 @@ function authenticate(nextState, replaceState) {
 React.render(
   <Router>
     <Route path="/" component={HomePage} onEnter={authenticate} />
+    <Route path="/about" component={AboutPage} onEnter={authenticate} />
     <Route path="/login" component={LoginPage} />
   </Router>,
   document.getElementById('app'));
