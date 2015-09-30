@@ -22,8 +22,13 @@ class Login extends React.Component {
     LoginStore.state.username = e.target.value;
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    LoginStore.login();
+  }
+
   render() {
-    return (<div><form><input type="text" onChange={this.username.bind(this)} /><input type="submit" value="Login" /></form></div>);
+    return (<div><form onSubmit={this.handleSubmit.bind(this)}><input type="text" onChange={this.username.bind(this)} /><input type="submit" value="Login" /></form></div>);
   }
 }
 

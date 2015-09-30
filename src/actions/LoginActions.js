@@ -1,8 +1,16 @@
 import alt from '../alt';
 
 class LoginActions {
-  authenticate(status) {
+  login() {
+    this.dispatch();
+	}
+
+  loginSuccess(status) {
     this.dispatch(status);
+	}
+
+  loginFailure(error) {
+    this.dispatch(error);
 	}
 }
 
