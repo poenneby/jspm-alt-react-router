@@ -8,7 +8,7 @@ class LoginStore {
     this.username = '';
     this.error = '';
     this.bindListeners({
-      // handleLogin: LoginActions.LOGIN,
+      handleLogin: LoginActions.LOGIN,
       handleLoginSuccess: LoginActions.LOGIN_SUCCESS,
       handleLoginFailure: LoginActions.LOGIN_FAILURE
     });
@@ -17,10 +17,11 @@ class LoginStore {
 	}
 
   handleLogin() {
-    this.loggedIn = false;
+    console.log('logging in');
   }
 
 	handleLoginSuccess(loggedIn) {
+    console.log('logged in');
 	   this.loggedIn = loggedIn;
 	}
 
