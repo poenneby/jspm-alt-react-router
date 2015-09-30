@@ -98,11 +98,12 @@ class Authenticator extends React.Component {
   }
 }
 
+
 function authenticate(nextState, replaceState) {
   if (!LoginStore.state.loggedIn) {
     replaceState(nextState.location.pathname, '/authenticate');
   }
-  LoginStore.state.loggedIn = false;
+  //LoginStore.state.loggedIn = false;
 }
 
 React.render(
