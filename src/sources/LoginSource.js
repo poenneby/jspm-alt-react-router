@@ -28,7 +28,7 @@ const LoginSource = {
             setTimeout(function () {
 
               // change this to `false` to see the error action being handled.
-              if (false) {
+              if (true) {
                 // resolve with some mock data
                 resolve(true);
               } else {

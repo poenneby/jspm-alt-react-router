@@ -78,6 +78,11 @@ class AuthenticatorPage extends React.Component {
 
 class Authenticator extends React.Component {
 
+  componentDidMount() {
+    LoginStore.state.authType = 'verify';
+    LoginStore.login();
+  }
+
   componentDidUpdate(oldState) {
     if (LoginStore.state.loggedIn) {
       console.log('Logged in');
@@ -88,10 +93,7 @@ class Authenticator extends React.Component {
     }
   }
 
-  componentDidMount() {
-    LoginStore.state.authType = 'verify';
-    LoginStore.login();
-  }
+
 
   render() {
     return null;
@@ -103,7 +105,7 @@ function authenticate(nextState, replaceState) {
   if (!LoginStore.state.loggedIn) {
     replaceState(nextState.location.pathname, '/authenticate');
   }
-  //LoginStore.state.loggedIn = false;
+  LoginStore.state.loggedIn = false;
 }
 
 React.render(
