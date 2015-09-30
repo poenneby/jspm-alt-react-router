@@ -16,7 +16,7 @@ const LoginSource = {
             } else {
               reject('Username and/or password incorrect');
             }
-          }, 250);
+          }, 1000);
         });
       },
 
