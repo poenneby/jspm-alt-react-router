@@ -12,7 +12,7 @@ class HomePage extends React.Component {
   }
 
   render() {
-    return (<div><h1>A protected page!</h1></div>);
+    return (<div><h1>A protected page!</h1><p><Link to="/about">About</Link></p></div>);
   }
 }
 
@@ -23,7 +23,7 @@ class AboutPage extends React.Component {
   }
 
   render() {
-    return (<div><h1>Another protected page!</h1></div>);
+    return (<div><h1>Another protected page!</h1><p><Link to="/">Home</Link></p></div>);
   }
 }
 
@@ -61,6 +61,7 @@ class Login extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    LoginStore.state.authType = 'login';
     LoginStore.login();
   }
 
@@ -69,10 +70,39 @@ class Login extends React.Component {
   }
 }
 
+class AuthenticatorPage extends React.Component {
+  render() {
+    return (<AltContainer store={LoginStore}><Authenticator {...this.props} /></AltContainer>);
+  }
+}
+
+class Authenticator extends React.Component {
+
+  componentDidUpdate(oldState) {
+    if (LoginStore.state.loggedIn) {
+      console.log('Logged in');
+      oldState.history.pushState({}, oldState.location.state);
+    } else {
+      alert(LoginStore.state.error);
+      oldState.history.pushState(oldState.location.state, "/login");
+    }
+  }
+
+  componentDidMount() {
+    LoginStore.state.authType = 'verify';
+    LoginStore.login();
+  }
+
+  render() {
+    return null;
+  }
+}
+
 function authenticate(nextState, replaceState) {
   if (!LoginStore.state.loggedIn) {
-    replaceState(nextState.location.pathname, '/login');
+    replaceState(nextState.location.pathname, '/authenticate');
   }
+  LoginStore.state.loggedIn = false;
 }
 
 React.render(
@@ -80,5 +110,6 @@ React.render(
     <Route path="/" component={HomePage} onEnter={authenticate} />
     <Route path="/about" component={AboutPage} onEnter={authenticate} />
     <Route path="/login" component={LoginPage} />
+    <Route path="/authenticate" component={AuthenticatorPage} />
   </Router>,
   document.getElementById('app'));

@@ -6,6 +6,7 @@ class LoginStore {
   constructor() {
     this.loggedIn = false;
     this.username = '';
+    this.authType = '';
     this.error = '';
     this.bindListeners({
       handleLogin: LoginActions.LOGIN,
@@ -28,6 +29,8 @@ class LoginStore {
   handleLoginFailure(error) {
     this.error = error;
   }
+
+
 }
 
 export default alt.createStore(LoginStore, 'LoginStore');
