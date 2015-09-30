@@ -1,12 +1,12 @@
 import alt from '../alt';
-import UserActions from '../actions/UserActions';
+import LoginActions from '../actions/LoginActions';
 
-class UserStore {
+class LoginStore {
   constructor() {
     this.loggedIn = false;
     this.username = '';
     this.bindListeners({
-      handleAuthentication: UserActions.AUTHENTICATE
+      handleAuthentication: LoginActions.AUTHENTICATE
     });
 	}
 
@@ -15,4 +15,4 @@ class UserStore {
 	}
 }
 
-export default alt.createStore(UserStore, 'UserStore');
+export default alt.createStore(LoginStore, 'LoginStore');

@@ -1,9 +1,9 @@
 import alt from '../alt';
 
-class UserActions {
+class LoginActions {
   authenticate(status) {
     this.dispatch(status);
 	}
 }
 
-export default alt.createActions(UserActions);
+export default alt.createActions(LoginActions);

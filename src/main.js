@@ -1,13 +1,13 @@
 import React from 'react';
 import {Router, Route, RouteHandler, Link, IndexRoute} from 'react-router';
 
-import UserStore from './stores/UserStore';
+import LoginStore from './stores/LoginStore';
 
 class Home extends React.Component {
 
   constructor() {
     super();
-    console.log(UserStore.state.loggedIn);
+    console.log(LoginStore.state.loggedIn);
   }
 
 
@@ -19,7 +19,7 @@ class Home extends React.Component {
 class Login extends React.Component {
 
   username(e) {
-    UserStore.state.username = e.target.value;
+    LoginStore.state.username = e.target.value;
   }
 
   render() {
@@ -28,7 +28,7 @@ class Login extends React.Component {
 }
 
 function authenticate(nextState, replaceState) {
-  if (UserStore.state.loggedIn) {
+  if (LoginStore.state.loggedIn) {
     alert('hello');
   } else {
     replaceState({}, '/login');
