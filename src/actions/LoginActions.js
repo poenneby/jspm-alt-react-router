@@ -5,6 +5,10 @@ class LoginActions {
     this.dispatch();
 	}
 
+  verify() {
+    this.dispatch();
+	}
+
   loginSuccess(status) {
     this.dispatch(status);
 	}

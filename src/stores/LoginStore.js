@@ -6,9 +6,9 @@ class LoginStore {
   constructor() {
     this.loggedIn = false;
     this.username = '';
-    this.authType = '';
     this.error = '';
     this.bindListeners({
+      handleVerify: LoginActions.VERIFY,
       handleLogin: LoginActions.LOGIN,
       handleLoginSuccess: LoginActions.LOGIN_SUCCESS,
       handleLoginFailure: LoginActions.LOGIN_FAILURE
@@ -16,6 +16,9 @@ class LoginStore {
 
     this.exportAsync(LoginSource);
 	}
+
+  handleVerify() {
+  }
 
   handleLogin() {
     console.log('logging in');

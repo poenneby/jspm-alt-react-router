@@ -61,7 +61,6 @@ class Login extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    LoginStore.state.authType = 'login';
     LoginStore.login();
   }
 
@@ -79,8 +78,7 @@ class AuthenticatorPage extends React.Component {
 class Authenticator extends React.Component {
 
   componentDidMount() {
-    LoginStore.state.authType = 'verify';
-    LoginStore.login();
+    LoginStore.verify();
   }
 
   componentDidUpdate(oldState) {
