@@ -84,7 +84,7 @@ class Authenticator extends React.Component {
       console.log('Logged in');
       oldState.history.pushState({}, oldState.location.state);
     } else {
-      alert(LoginStore.state.error);
+      alert(this.props.errorMessage);
       oldState.history.pushState(oldState.location.state, "/login");
     }
   }
