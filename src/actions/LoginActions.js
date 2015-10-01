@@ -1,9 +1,13 @@
 import alt from '../alt';
 
 class LoginActions {
+  loginPrepare(username) {
+    this.dispatch(username);
+	}
+
   login() {
     this.dispatch();
-	}
+  }
 
   verify() {
     this.dispatch();

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {findDOMNode} from 'react';
 import {Router, Route, RouteHandler, Link, IndexRoute} from 'react-router';
 
 import AltContainer from 'alt/components/AltContainer';
 
 import LoginStore from './stores/LoginStore';
+import LoginActions from './actions/LoginActions';
 
 class HomePage extends React.Component {
 
@@ -42,30 +43,27 @@ class Login extends React.Component {
     super();
   }
 
-  componentDidMount() {
-    LoginStore.state.username = '';
-  }
-
   componentDidUpdate(oldState) {
     if (LoginStore.isLoggedIn()) {
-      console.log('Logged in');
+      // Logged in - redirect to originally requested path
       oldState.history.pushState({}, oldState.location.state);
+    } else if (this.props.errorMessage) {
+      // There was a problem during the login request
+      console.log(this.props.errorMessage);
     } else {
-      alert(LoginStore.state.error);
+      // Login request
+      LoginStore.login();
     }
-  }
-
-  username(e) {
-    LoginStore.state.username = e.target.value;
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    LoginStore.login();
+    let username = findDOMNode(this.refs.username).value
+    LoginActions.loginPrepare(username);
   }
 
   render() {
-    return (<div><form onSubmit={this.handleSubmit.bind(this)}><input type="text" onChange={this.username.bind(this)} /><input type="submit" value="Login" /></form></div>);
+    return (<div><form onSubmit={this.handleSubmit.bind(this)}><input ref="username" type="text" /><input type="submit" value="Login" /></form></div>);
   }
 }
 

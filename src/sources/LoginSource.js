@@ -53,7 +53,8 @@ const LoginSource = {
       },
 
       success: LoginActions.loginSuccess,
-      error: LoginActions.loginFailure
+      error: LoginActions.loginFailure,
+      loading: LoginActions.login
     }
   }
 };

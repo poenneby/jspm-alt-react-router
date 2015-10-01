@@ -6,23 +6,38 @@ class LoginStore {
   constructor() {
     this.loggedIn = false;
     this.username = '';
-    this.error = '';
+    this.errorMessage = undefined;
     this.bindListeners({
       handleVerify: LoginActions.VERIFY,
-      handleLogin: LoginActions.LOGIN,
+      loginPrepare: LoginActions.LOGIN_PREPARE,
       handleLoginSuccess: LoginActions.LOGIN_SUCCESS,
       handleLoginFailure: LoginActions.LOGIN_FAILURE
     });
 
     this.exportPublicMethods({
-      isLoggedIn: this.isLoggedIn
+      isLoggedIn: this.isLoggedIn,
+      isInProgress: this.isInProgress,
+      getErrorMessage: this.getErrorMessage
     });
 
     this.exportAsync(LoginSource);
 	}
 
+  loginPrepare(username) {
+    this.username = username;
+    this.errorMessage = undefined;
+  }
+
   isLoggedIn() {
     return this.getState().loggedIn;
+  }
+
+  isInProgress() {
+    return this.getState().inProgress;
+  }
+
+  getErrorMessage() {
+    return this.getState().errorMessage;
   }
 
   handleVerify() {
@@ -35,10 +50,11 @@ class LoginStore {
 	handleLoginSuccess(loggedIn) {
     console.log('logged in');
 	   this.loggedIn = loggedIn;
+     this.inProgress = false;
 	}
 
-  handleLoginFailure(error) {
-    this.error = error;
+  handleLoginFailure(errorMessage) {
+    this.errorMessage = errorMessage;
   }
 
 
