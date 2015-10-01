@@ -47,7 +47,7 @@ class Login extends React.Component {
   }
 
   componentDidUpdate(oldState) {
-    if (LoginStore.state.loggedIn) {
+    if (LoginStore.isLoggedIn()) {
       console.log('Logged in');
       oldState.history.pushState({}, oldState.location.state);
     } else {
@@ -82,7 +82,7 @@ class Authenticator extends React.Component {
   }
 
   componentDidUpdate(oldState) {
-    if (LoginStore.state.loggedIn) {
+    if (LoginStore.isLoggedIn()) {
       console.log('Logged in');
       oldState.history.pushState({}, oldState.location.state);
     } else {
@@ -100,10 +100,9 @@ class Authenticator extends React.Component {
 
 
 function authenticate(nextState, replaceState) {
-  if (!LoginStore.state.loggedIn) {
+  if (!LoginStore.isLoggedIn()) {
     replaceState(nextState.location.pathname, '/authenticate');
   }
-  LoginStore.state.loggedIn = false;
 }
 
 React.render(

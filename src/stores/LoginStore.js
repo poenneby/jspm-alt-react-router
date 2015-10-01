@@ -14,8 +14,16 @@ class LoginStore {
       handleLoginFailure: LoginActions.LOGIN_FAILURE
     });
 
+    this.exportPublicMethods({
+      isLoggedIn: this.isLoggedIn
+    });
+
     this.exportAsync(LoginSource);
 	}
+
+  isLoggedIn() {
+    return this.getState().loggedIn;
+  }
 
   handleVerify() {
   }
