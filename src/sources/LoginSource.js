@@ -29,14 +29,14 @@ const LoginSource = {
 
   login() {
     return {
-      remote(state) {
+      remote(state, username) {
         return new Promise(function (resolve, reject) {
           // simulate an asynchronous flow where data is fetched on
           // a remote server somewhere.
           setTimeout(function () {
 
             // change this to `false` to see the error action being handled.
-            if (state.username === 'Peter') {
+            if (username === 'Peter') {
               // resolve with some mock data
               resolve(true);
             } else {

@@ -50,16 +50,13 @@ class Login extends React.Component {
     } else if (this.props.errorMessage) {
       // There was a problem during the login request
       console.log(this.props.errorMessage);
-    } else {
-      // Login request
-      LoginStore.login();
     }
   }
 
   handleSubmit(e) {
     e.preventDefault();
     let username = findDOMNode(this.refs.username).value
-    LoginActions.loginPrepare(username);
+    LoginStore.login(username);
   }
 
   render() {
