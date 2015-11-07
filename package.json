@@ -1,7 +1,7 @@
 {
   "jspm": {
     "dependencies": {
-      "alt": "npm:alt@^0.17.3",
+      "alt": "npm:alt@0.17.8",
       "react": "npm:react@^0.13.3",
       "react-router": "npm:react-router@^1.0.0-rc1"
     },
@@ -12,7 +12,24 @@
     }
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.1.2",
+    "babel-preset-react": "^6.1.2",
+    "chai": "^3.4.0",
     "eslint": "^1.9.0",
-    "eslint-plugin-react": "^3.8.0"
+    "eslint-plugin-react": "^3.8.0",
+    "jspm": "^0.16.14",
+    "karma": "^0.13.15",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-jspm": "^2.0.2",
+    "karma-mocha": "^0.2.0",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-phantomjs-shim": "^1.1.2",
+    "karma-sinon-chai": "^1.1.0",
+    "karma-sourcemap-loader": "^0.3.6",
+    "mocha": "^2.3.3",
+    "phantomjs": "^1.9.18",
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0"
   }
 }
